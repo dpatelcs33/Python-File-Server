@@ -3,7 +3,7 @@ import tornado.ioloop as ioloop
 import tornado.httpserver as httpserver
 import mimetypes
 import os
-#import asyncio
+import asyncio
 
 
 class FileHandler(web.RequestHandler):
@@ -26,12 +26,13 @@ class FileHandler(web.RequestHandler):
             self.write(fp.read())        
 
 def main():
-    # TODO: production --> debug off
+
+    # TODO: production --> debug off , autoreload = off
     app = web.Application([
 
         (r"/files", FileHandler)
 
-    ], debug=True)
+    ], autoreload = True, debug = True)
 
     http_server = httpserver.HTTPServer(app)
     http_server.listen(8080)
