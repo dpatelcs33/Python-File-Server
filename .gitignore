@@ -3,3 +3,8 @@ VS_code_workspace.code-workspace
 /.vscode
 /test_files
 downloaded_file.tar
+__pycache__
+settings.json
+
+test_client.py
+test_client.js

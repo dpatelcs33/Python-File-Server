@@ -1,6 +1,4 @@
-import tornado.web as web
-import tornado.ioloop as ioloop
-import tornado.httpserver as httpserver
+from tornado import web, ioloop, httpserver, iostream
 import mimetypes
 import os
 import asyncio
@@ -8,7 +6,7 @@ import asyncio
 
 class FileHandler(web.RequestHandler):
 
-    def get(self):
+    async def get(self):
 
         # TODO : handle get requests Asynchronously
 
@@ -22,9 +20,27 @@ class FileHandler(web.RequestHandler):
         print(content_type)
         self.add_header('Content-Type', content_type)
 
-        with open(abs_path) as fp:
-            self.write(fp.read())        
+        buff_size = 1024 * 1024 * 1
 
+        with open(abs_path, "rb") as fp:
+
+            while True:
+
+                chunk = fp.read(buff_size)        
+                
+                if not chunk:
+                    break
+
+                try:
+                    self.write(chunk)
+                    await self.flush()
+
+                except iostream.StreamClosedError:
+                    break
+
+                finally:
+                    del chunk
+                    await asyncio.sleep(0)
 def main():
 
     # TODO: production --> debug off , autoreload = off
@@ -32,7 +48,7 @@ def main():
 
         (r"/files", FileHandler)
 
-    ], autoreload = True, debug = True)
+    ], autoreload = False, debug = False)
 
     http_server = httpserver.HTTPServer(app)
     http_server.listen(8080)
