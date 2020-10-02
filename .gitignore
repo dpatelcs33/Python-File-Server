@@ -7,3 +7,7 @@ __pycache__
 settings.json
 test_client.py
 test_client.js
+full_transaction_1gb.har
+get_request_async_large.har
+get_request_async.har
+picture

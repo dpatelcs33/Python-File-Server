@@ -22,12 +22,13 @@ class FileHandler(web.RequestHandler):
 
         if not content_type:
             self.set_header('Content-Type', "application/octet-stream")
-            
+        else:
+            self.set_header('Content-Type', content_type)
         #print(content_type)
 
         self.add_header('Content-Disposition', "attachment; filename={}".format(os.path.basename(abs_path)))
-        self.set_header('Content-Type', content_type)
         self.add_header('Content-Length', file_size)
+        
         buff_size = 1024 * 1024 * 1
 
         with open(abs_path, "rb") as fp:
