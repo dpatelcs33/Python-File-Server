@@ -6,7 +6,8 @@ Usage:
 
 1. Activate virtualenv: /env/bin/activate
 
-2. Run `python threaded_server.py <port>` for multi-threaded file reads  
+2. Run  
+`python threaded_server.py <port>` for multi-threaded file reads  
 or  
 `python async_server.py <port>` for asynchronous network i/o only  
 or  
