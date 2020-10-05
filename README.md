@@ -1,6 +1,14 @@
 # Python-File-Server
 A RESTful file server app for servicing download requests concurrently
 
+Dependencies:  
+>python 3.7+ / pip --> use included virtualenv
+>
+>Linux (Testing):   
+>loadimpact/k6  
+>har-to-k6 --> browser session convertion for testing  
+>node.js 14.x --> for har-to-k6  
+>cURL
 
 Usage:
 
