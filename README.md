@@ -13,4 +13,4 @@ Examples:
 
 `cURL http://<ip>:<port>/files -G -d 'path=/home/user/Desktop/file.tar' -o file.tar`
 
-`http://<ip>:<port>/files?path=path=/home/user/Desktop/file.tar`
+`http://<ip>:<port>/files?path=/home/user/Desktop/file.tar`
