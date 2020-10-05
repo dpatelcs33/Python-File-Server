@@ -1,0 +1,14 @@
+/.idea
+HDD_VS_code_workspace.code-workspace
+/.vscode
+/test_files
+downloaded_file.tar
+__pycache__
+settings.json
+test_client.py
+test_client.js
+full_transaction_1gb.har
+get_request_async_large.har
+get_request_async.har
+picture
+seq_server.py

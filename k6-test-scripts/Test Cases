@@ -1,0 +1,44 @@
+Test Cases:
+
+------Test 1----
+1GB : Sequential / Non-chunked / 1 VUs / 5 Iterations
+1GB : Sequential / Non-chunked / 10 VUs / 5 Iterations
+
+------Test 2----
+1GB : Sequential / Chunked / Blocking socket flush / 1 VUs / 5 Iterations
+1GB : Sequential / Chunked / Blocking socket flush / 10 VUs / 5 Iterations
+
+------Test 3----
+1GB : Async (socket flush only) / Non-chunked / 1 VUs / 5 iterations / gen.sleep(0.0000000001)
+1GB : Async (socket flush only) / Non-chunked / 10 VUs / 5 iterations / gen.sleep(0.0000000001)
+
+1GB : Async (socket flush only) / Chunked / 1 VUs / 5 iterations / gen sleep(0.0000000001)
+1GB : Async (socket flush only) / Chunked / 10 VUs / 5 iterations / gen.sleep(0.0000000001)
+
+1GB : Async (socket flush only) / Non-chunked / 1 VUs / 5 iterations / asyncio.sleep(0)
+1GB : Async (socket flush only) / Non-chunked / 10 VUs / 5 iterations / asyncio.sleep(0)
+
+1GB : Async (socket flush only) / Chunked / 1 VUs / 5 iterations / asyncio.sleep(0)
+1GB : Async (socket flush only) / Chunked / 10 VUs / 5 iterations / asyncio.sleep(0)
+
+1GB : Async (socket flush only) / Non-chunked / 1 VUs / 5 iterations / NO SLEEP
+1GB : Async (socket flush only) / Non-chunked / 10 VUs / 5 iterations / NO SLEEP
+
+1GB : Async (socket flush only) / Chunked / 1 VUs / 5 iterations / NO SLEEP
+1GB : Async (socket flush only) / Chunked / 10 VUs / 5 iterations / NO SLEEP
+
+-------------CHOOSE (SLEEP METHOD VS NO SLEEP) AND (CHUNKED OR NON CHUNKED)-------------
+
+
+------Test 4----
+1GB : Async (add multithreaded read) / (CHUNK) / 1 VUs / 5 iterations
+1GB : Async (add multithreaded read)/ (CHUNK) / 10 VUs / 5 iterations
+
+-------------CHOOSE MULTITHREADED READ OR NOT------------------
+
+
+------Test 5----
+1GB : Async (add os.sendfile) / (CHUNK) / 1 VUs / 5 iterations
+1GB : Async (add os.sendfile)/ (CHUNK) / 10 VUs / 5 iterations
+
+
