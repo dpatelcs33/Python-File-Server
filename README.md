@@ -1,5 +1,5 @@
 # Python-File-Server
-A RESTful file server application for servicing download requests concurrently(multi threading) and/or in parrelel(multi processing)
+A RESTful file server application for servicing download requests concurrently(multi threading) and/or in parrelel(multi processing).
 
 Currently only supporting `GET` requests with pause/resume functionality.
 
