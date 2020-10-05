@@ -1,5 +1,6 @@
+python 3.8
 loadimpact/k6 --> testing
-har-to-k6
 node.js 14.x
+har-to-k6
 curl
 

@@ -1,5 +1,5 @@
 /.idea
-VS_code_workspace.code-workspace
+HDD_VS_code_workspace.code-workspace
 /.vscode
 /test_files
 downloaded_file.tar
@@ -11,3 +11,4 @@ full_transaction_1gb.har
 get_request_async_large.har
 get_request_async.har
 picture
+seq_server.py
