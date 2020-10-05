@@ -4,7 +4,7 @@ import os
 import asyncio
 import time
 import io
-
+import sys
 
 class FileHandler(web.RequestHandler):
 
@@ -56,16 +56,21 @@ class FileHandler(web.RequestHandler):
 
 def main():
 
-    # TODO: production --> debug off , autoreload = off
     app = web.Application([
 
         (r"/files", FileHandler)
 
-    ], autoreload=True, debug=True)
+    ], autoreload=False, debug=False)
 
-    http_server = httpserver.HTTPServer(app)
-    http_server.listen(8080)
-    print("FileServer(Async Network IO): Listening on port 8080")
+    try:
+        port = int(sys.argv[1])
+    except:
+        print("Error: Port not provided!")
+        sys.exit(2)
+
+    app.listen(port)
+    print("FileServer(Async Network I/O): Listening on port {}".format(port))
+
     ioloop.IOLoop.current().start()
 
 
