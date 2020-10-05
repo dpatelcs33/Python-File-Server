@@ -5,7 +5,15 @@ A RESTful file server app for servicing download requests concurrently
 Usage:
 
 1. Activate virtualenv: /env/bin/activate
-2. Run `python threaded_server.py <port>` for multi-threaded file reads or `python async_server.py <port>` for asynchronous network i/o only
+
+2. Run `python threaded_server.py <port>` for multi-threaded file reads  
+or  
+`python async_server.py <port>` for asynchronous network i/o only  
+or  
+`python multi_process_threaded_server.py <port>` for multi-processed and multi-threaded server  
+or  
+`python multi_process_async_server.py <port>` for multi-processed async network i/o only  
+
 3. Use an http client, cURL or web browser to fetch files from server's file-system with a GET request
 
 
