@@ -11,7 +11,7 @@ class FileHandler(web.RequestHandler):
 
     async def get(self):
 
-        # TODO : non-blocking file reads
+        print("PID {} : getting file".format(os.getpid()))
 
         abs_path = os.path.abspath(self.get_argument('path'))
 
@@ -54,14 +54,26 @@ class FileHandler(web.RequestHandler):
                     # Used for metering/limiting request bandwidth or forced context switching for fast networks
                     await asyncio.sleep(0.0000000001)
 
+        print("PID {} : sent file {}".format(
+            os.getpid(), os.path.basename(abs_path)))
 
-def main():
 
+def make_app():
     app = web.Application([
 
         (r"/files", FileHandler)
 
     ], autoreload=False, debug=False)
+    return app
+
+
+def main():
+
+    # app = web.Application([
+
+    #     (r"/files", FileHandler)
+
+    # ], autoreload=False, debug=False)
 
     try:
         port = int(sys.argv[1])
@@ -69,10 +81,18 @@ def main():
         print("Error: Port not provided!")
         sys.exit(2)
 
-    app.listen(port)
-    print("FileServer(Async Network I/O): Listening on port {}".format(port))
-
+    app = make_app()
+    server = httpserver.HTTPServer(app)
+    server.bind(port)
+    server.start(0)  # forks one process per cpu
+    print("FileServer PID {0}: Listening on port {1}".format(
+        os.getpid(), port))
     ioloop.IOLoop.current().start()
+
+    # app.listen(port)
+    # print("FileServer(Async Network I/O): Listening on port {}".format(port))
+
+    # ioloop.IOLoop.current().start()
 
 
 if __name__ == "__main__":

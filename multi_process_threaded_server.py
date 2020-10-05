@@ -1,18 +1,16 @@
-from tornado import web, ioloop, httpserver, iostream
+from tornado import web, ioloop, iostream, httpserver
 import mimetypes
 import os
 import asyncio
-import time
-import io
+from concurrent.futures import ThreadPoolExecutor
+import aiofiles
 import sys
 
 
 class FileHandler(web.RequestHandler):
 
     async def get(self):
-
-        # TODO : non-blocking file reads
-
+        print("PID {} :getting file".format(os.getpid()))
         abs_path = os.path.abspath(self.get_argument('path'))
 
         if not os.access(abs_path, os.R_OK):
@@ -33,10 +31,17 @@ class FileHandler(web.RequestHandler):
 
         chunk_size = 1024 * 1024 * 2
 
-        with open(abs_path, "rb") as fp:
+        async with aiofiles.open(abs_path, "rb", buffering=0, loop=ioloop.IOLoop.current(), executor=self.application.thread_executor) as fp:
+
+            # No buffering in address space and inform kernel to buffer aggressively for given file
+            if os.name == "posix":
+
+                os.posix_fadvise(fp.fileno(), 0, file_size,
+                                 os.POSIX_FADV_WILLNEED)
 
             while True:
-                chunk = fp.read(chunk_size)
+
+                chunk = await fp.read(chunk_size)
 
                 if not chunk:
                     break
@@ -52,16 +57,25 @@ class FileHandler(web.RequestHandler):
                     del chunk
 
                     # Used for metering/limiting request bandwidth or forced context switching for fast networks
-                    await asyncio.sleep(0.0000000001)
+                    await asyncio.sleep(0.000000001)
+
+        print("PID {} : sent file {}".format(
+            os.getpid(), os.path.basename(abs_path)))
 
 
-def main():
-
+def make_app():
     app = web.Application([
 
         (r"/files", FileHandler)
 
     ], autoreload=False, debug=False)
+
+    app.thread_executor = ThreadPoolExecutor()
+
+    return app
+
+
+def main():
 
     try:
         port = int(sys.argv[1])
@@ -69,9 +83,12 @@ def main():
         print("Error: Port not provided!")
         sys.exit(2)
 
-    app.listen(port)
-    print("FileServer(Async Network I/O): Listening on port {}".format(port))
-
+    app = make_app()
+    server = httpserver.HTTPServer(app)
+    server.bind(port)
+    server.start(0)  # forks one process per cpu
+    print("FileServer PID {0}: Listening on port {1}".format(
+        os.getpid(), port))
     ioloop.IOLoop.current().start()
 
 
