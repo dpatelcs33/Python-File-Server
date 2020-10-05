@@ -4,6 +4,7 @@ import os
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 import aiofiles
+import sys
 
 
 class FileHandler(web.RequestHandler):
@@ -61,17 +62,22 @@ class FileHandler(web.RequestHandler):
 
 def main():
 
-    # TODO: production --> debug off , autoreload = off
     app = web.Application([
 
         (r"/files", FileHandler)
 
-    ], autoreload=True, debug=True)
+    ], autoreload=False, debug=False)
 
     app.thread_executor = ThreadPoolExecutor()
 
-    app.listen(8080)
-    print("FileServer(Threaded File Reads): Listening on port 8080")
+    try:
+        port = int(sys.argv[1])
+    except:
+        print("Error: Port not provided!")
+        sys.exit(2)
+
+    app.listen(port)
+    print("FileServer(Threaded File Reads): Listening on port {}".format(port))
 
     ioloop.IOLoop.current().start()
 
