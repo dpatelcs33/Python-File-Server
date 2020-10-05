@@ -5,7 +5,7 @@ Dependencies:
 >python 3.7+ / pip --> use included virtualenv
 >
 >Linux (Testing):   
->loadimpact/k6  
+>loadimpact/k6 (example scripts included) --> https://k6.io/ 
 >har-to-k6 --> browser session convertion for testing  
 >node.js 14.x --> for har-to-k6  
 >cURL
