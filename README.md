@@ -2,7 +2,10 @@
 A RESTful file server app for servicing download requests concurrently
 
 Dependencies:  
->python 3.7+ / pip --> use included virtualenv
+
+>python 3.8 / pip3 --> **Using included virtualenv "env" can lead to problems. Use at your own risk**
+>
+>**Setting up a new python 3.8 virtualenv and then using `pip install -r requirements.txt` is highly recommended**
 >
 >Linux (Testing):   
 >loadimpact/k6 (example scripts included) --> https://k6.io/  
@@ -12,9 +15,13 @@ Dependencies:
 
 Usage:
 
-1. Activate virtualenv: /env/bin/activate
+1. Setup a fresh virtualenv using python 3.8  
 
-2. Run  
+2. Activate environment  
+
+3. Use the provided requirements.txt --> `pip install -r requirements.txt` to get the needed dependencies  
+
+4. Run  
 `python threaded_server.py <port>` for multi-threaded file reads  
 or  
 `python async_server.py <port>` for asynchronous network i/o only  
@@ -23,7 +30,7 @@ or
 or  
 `python multi_process_async_server.py <port>` for multi-processed async network i/o only  
 
-3. Use an http client, cURL or web browser to fetch files from server's file-system with a GET request
+5. Use an http client, cURL or web browser to fetch files from server's file-system with a GET request
 
 
 Examples:
