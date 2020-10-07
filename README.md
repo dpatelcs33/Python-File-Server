@@ -1,21 +1,21 @@
 # Python-File-Server (Tornado)
 A RESTful, Asynchronous file server application for servicing download requests Concurrently(Multi-Threading) and/or in Parallel(Multi-Processing).
 
-Currently only supporting `GET` requests with pause/resume functionality.
+*Currently only supporting `GET` requests with pause/resume functionality
 
-###### Dependencies:  
+## Dependencies:  
 
->python 3.8 / pip3 --> **Using included virtualenv "env" can lead to problems. Use at your own risk**
+> python 3.8 / pip3 --> **Using included virtualenv "env" can lead to problems. Use at your own risk**
 >
->**Setting up a new python 3.8 virtualenv and then using `pip install -r requirements.txt` is highly recommended**
->
->Linux (Testing):   
->loadimpact/k6 (example scripts included) --> https://k6.io/  
->har-to-k6 --> browser session convertion for testing  
->node.js 14.x --> for har-to-k6  
->cURL
+> **Setting up a new python 3.8 virtualenv and then using `pip install -r requirements.txt` is highly recommended**
+> 
+> Linux (Testing):   
+> loadimpact/k6 (example scripts included) --> https://k6.io/  
+> har-to-k6 --> browser session convertion for testing  
+> node.js 14.x --> for har-to-k6  
+> cURL
 
-###### Usage:
+## Usage:
 
 1. Setup a fresh virtualenv using python 3.8  
 
@@ -35,15 +35,15 @@ or
 5. Use an http client, cURL or web browser to fetch files from server's file-system with a GET request
 
 
-###### Examples:
+## Examples:
 
 `cURL http://<ip>:<port>/files -G -d 'path=/home/user/Desktop/file.tar' -o file.tar`
 
 `http://<ip>:<port>/files?path=/home/user/Desktop/file.tar`
 
-**-----Contributions are Welcome-----**
+## -----Contributions are Welcome-----
 
-###### Some takeaways and guidelines from developer's perspective (as of 10/07/2020):
+**Some takeaways and guidelines from developer's perspective (as of 10/07/2020):**
 
 - Multithreaded would be useful for fast drives like SSDs and scales up very well. Apps benefit from non-blocking calls in that the server can take and serve more requests (with the benefit of in-memory buffers) but HDD needles still need to travel to the different sectors physically to retrieve files/chunks sequentially. I/O bound tasks, in general, are better handled with threads. Threads in this case are contained in a single-process with callbacks to the IOLoop in the main thread. Main thread uses the IOLoop to peform context switching between threads.
 
@@ -57,7 +57,8 @@ or
 
 - Different user space caching techniques could be used like mmap, bytearray, etc. all with costs/benefits of their own and need to be efficiently controlled within app for multi-threaded and multi-processing to take full advantage.
 
-###### Some interesting features for future consideration: 
+**Some interesting features for future consideration:**  
+
 - load balancing setup
 - byte-serving files in a specific range
 - granular initialization of multiprocessing forks depending on # of concurrent requests
