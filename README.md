@@ -8,7 +8,7 @@ A RESTful, Asynchronous file server application for servicing download requests 
 > Linux : python 3.8 / pip3 --> **Using included virtualenv "env" can lead to problems. Use at your own risk**  
 > Windows: python 3.7 (python 3.8 on windows breaks Tornado's IOLoop and multiprocessing implementations)
 >
-> **Setting up a new python 3.8 virtualenv and then using `pip install -r requirements.txt` is highly recommended**
+> **Setting up a new python 3.8 virtualenv on linux and then using `pip install -r requirements.txt` is highly recommended**
 > 
 > Linux (Testing):   
 > loadimpact/k6 (example scripts included) --> https://k6.io/  
@@ -18,7 +18,7 @@ A RESTful, Asynchronous file server application for servicing download requests 
 
 ## Usage:
 
-1. Setup a fresh virtualenv using python 3.8  
+1. Setup a fresh virtualenv using python 3.8 (linux) / python 3.7 (windows)  
 
 2. Activate environment  
 
