@@ -48,7 +48,7 @@ or
 
 - Multithreaded would be useful for fast drives like SSDs and scales up very well. Apps benefit from non-blocking calls in that the server can take and serve more requests (with the benefit of in-memory buffers) but HDD needles still need to travel to the different sectors physically to retrieve files/chunks sequentially. I/O bound tasks, in general, are better handled with threads. Threads in this case are contained in a single-process with callbacks to the IOLoop in the main thread. Main thread uses the IOLoop to peform context switching between threads.
 
-- Multiprocessing can dramatically impact runime delays like python bookkeeping, garbage collection overhead, buffering, callbacks, IOLoop latency, building responses etc.
+- Multiprocessing can dramatically improve runime by taking advantage of multiple cores to reduce delays from python bookkeeping, garbage collection overhead, buffering, callbacks, IOLoop latency, building responses etc.
 
 - Download pause/resume functionality can backfire if client code is not setup correctly to timeout/disconnect upon a long pause duration. However, the benefits of pause/resume feature with very large file downloads from user side outweighs this and there might be a way to resolve it with some thought on server side.
 
