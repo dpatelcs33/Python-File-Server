@@ -12,3 +12,4 @@ get_request_async_large.har
 get_request_async.har
 picture
 seq_server.py
+\env
