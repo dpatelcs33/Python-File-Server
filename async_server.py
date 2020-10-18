@@ -67,6 +67,10 @@ def main():
         print("Error: Port not provided!")
         sys.exit(2)
 
+    # Fix for windows python 3.8 --> use the tornado supported selector event loop instead of the python 3.8 proactor event loop on windows
+    if sys.version_info >= (3, 8) and sys.platform == "win32":
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
     app.listen(port)
     print("FileServer(Async Network I/O): Listening on port {}".format(port))
 
