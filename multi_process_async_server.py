@@ -69,12 +69,6 @@ def make_app():
 
 def main():
 
-    # app = web.Application([
-
-    #     (r"/files", FileHandler)
-
-    # ], autoreload=False, debug=False)
-
     try:
         port = int(sys.argv[1])
     except:
@@ -92,11 +86,6 @@ def main():
     print("FileServer PID {0}: Listening on port {1}".format(
         os.getpid(), port))
     ioloop.IOLoop.current().start()
-
-    # app.listen(port)
-    # print("FileServer(Async Network I/O): Listening on port {}".format(port))
-
-    # ioloop.IOLoop.current().start()
 
 
 if __name__ == "__main__":
