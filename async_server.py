@@ -11,8 +11,6 @@ class FileHandler(web.RequestHandler):
 
     async def get(self):
 
-        # TODO : non-blocking file reads
-
         abs_path = os.path.abspath(self.get_argument('path'))
 
         if not os.access(abs_path, os.R_OK):
