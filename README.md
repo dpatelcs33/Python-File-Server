@@ -5,8 +5,8 @@ A RESTful, Asynchronous file server application for servicing download requests 
 
 ## Dependencies:  
 
-> Linux : python 3.8 / pip3 --> **Using included virtualenv "env" can lead to problems. Use at your own risk**  
-> Windows: python 3.7 (python 3.8 on windows breaks Tornado's IOLoop and multiprocessing implementations)
+> Linux : python 3.8 / pip3 
+> Windows: python 3.7 (python 3.8 on windows breaks Tornado's IOLoop (fixed in PR #7) and multiprocessing implementations)
 >
 > **Setting up a new python 3.8 virtualenv on linux and then using `pip install -r requirements.txt` is highly recommended**
 > 
