@@ -13,3 +13,4 @@ get_request_async.har
 picture
 seq_server.py
 /env
+/win_env
