@@ -14,8 +14,4 @@ six==1.15.0
 toml==0.10.1
 tornado==6.0.4
 urllib3==1.25.10
-<<<<<<< HEAD
 wrapt==1.12.1
-=======
-wrapt==1.12.1
->>>>>>> master
